@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    //
       /**
      * The attributes that are mass assignable.
      *
@@ -15,4 +14,9 @@ class Role extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function admin()
+    {
+        return $this->belongsToMany(Admin::class);
+    }
 }

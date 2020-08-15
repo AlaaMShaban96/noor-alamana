@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AdminRole extends Model
+class EmailsType extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,6 +12,11 @@ class AdminRole extends Model
      * @var array
      */
     protected $fillable = [
-        'role_id', 'admin_id',
+        'name', 'icon',
     ];
+
+    public function emails()
+    {
+        return $this->hasMany('App\Emails');
+    }
 }

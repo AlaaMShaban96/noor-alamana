@@ -18,7 +18,7 @@ class CreateAdminRolesTable extends Migration
             $table->tinyInteger('role_id')->unsigned();
             $table->tinyInteger('admin_id')->unsigned();
             $table->foreign('role_id')
-                ->references('id')->on('admins')
+                ->references('id')->on('roles')
                 ->onDelete('cascade');
                 $table->foreign('admin_id')
                 ->references('id')->on('admins')

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AdminRole extends Model
+class ContactUs extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,6 +12,6 @@ class AdminRole extends Model
      * @var array
      */
     protected $fillable = [
-        'role_id', 'admin_id',
+        'name', 'email', 'subject','message',
     ];
 }
