@@ -17,7 +17,7 @@ class Language extends Model
     
     public function categoryTranslation()
     {
-        return $this->hasMany('App\CategoriesTranslation');
+        return $this->hasMany(CategoryTranslation::class);
     }
 
     public function ItemTranslation()

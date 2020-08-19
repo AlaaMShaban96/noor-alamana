@@ -16,11 +16,11 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::resource('category', 'Cpanel\CategoryController');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user/logout', 'Auth\LoginController@logoutUser')->name('user.logout');
 
-Route::group(['prefix' => 'admin'], function() {
+// Route::group(['prefix' => 'admin'], function() {
     Route::get('/login','Cpanel\Auth\LoginController@showLoginForm')->name('admin.login');
     Route::post('/login','Cpanel\Auth\LoginController@login')->name('admin.login.submit');
     Route::get('/register', 'Cpanel\Auth\RegisterController@showRegistrationForm')->name('admin.register');
@@ -31,4 +31,4 @@ Route::group(['prefix' => 'admin'], function() {
     Route::post('/password/email','Cpanel\Auth\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
     Route::get('/password/reset/{token}','Cpanel\Auth\ResetPasswordController@showResetForm')->name('admin.password.reset');
     Route::post('/password/reset','Cpanel\Auth\ResetPasswordController@reset');
-});
+// });
