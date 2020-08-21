@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Items extends Model
+class Item extends Model
 {
   /**
      * The attributes that are mass assignable.
@@ -17,16 +17,16 @@ class Items extends Model
 
     public function admin()
     {
-        return $this->belongsTo('App\Admin');
+        return $this->belongsTo(Admin::class);
     }
 
     public function category()
     {
-        return $this->belongsTo('App\Categories');
+        return $this->belongsTo(Category::class);
     }
 
-    public function ItemTranslation()
+    public function itemTranslation()
     {
-        return $this->hasMany('App\ItemsTranslation');
+        return $this->hasMany(ItemTranslation::class);
     }
 }

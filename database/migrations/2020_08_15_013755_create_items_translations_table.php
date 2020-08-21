@@ -13,7 +13,7 @@ class CreateItemsTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('items_translations', function (Blueprint $table) {
+        Schema::create('item_translations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('item_id')->unsigned();
             $table->char('language_code',2);

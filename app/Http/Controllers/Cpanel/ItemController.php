@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Cpanel;
 
+use App\Item;
 use App\Category;
-use App\CategoryTranslation;
+use App\ItemTranslation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CategoryController extends Controller
+class ItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories=Category::all();
-        return view('category.index',compact('categories'));
-        
+        $items=Item::all();
+        return view('item.index', compact('items'));
     }
 
     /**
@@ -28,7 +28,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create');
+       $categories = Category::all();
+        return view('item.create', compact('categories'));
     }
 
     /**
@@ -39,37 +40,34 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-       
+        
         $request->validate([
             
+            'category_id' => 'required', 
+            
             'language_codes' => 'required', 
-            
+
             'names' => 'required', 
-            
-            'descriptions' => 'required',
-             
+
             'image' => 'required', 
-           
+            
             
         ]);
-        
-        $category = new Category();
-        $category->admin_id = 1;
-        $category->image="img/path";
-        $category->save();
-
+        $item = new Item();
+        $item->admin_id = 1;
+        $item->category_id = $request->category_id;
+        $item->image=$this->uploadeImage( $request);
+        $item->save();
+dd('uplade img done');
         foreach ($request->language_codes as $key => $code) {
             
-            $translation=new CategoryTranslation();
-            $translation->category_id=$category->id;
+            $translation=new ItemTranslation();
+            $translation->item_id=$item->id;
             $translation->name=$request->names[$key];
-            $translation->description=$request->descriptions[$key];
             $translation->language_code=$code;
             $translation->save();
         }
-       
        return redirect()->back();
-
     }
 
     /**
@@ -78,9 +76,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Item $item)
     {
-        return view('category.show', compact('category'));
+        return view('item.show', compact('item'));
     }
 
     /**
@@ -89,9 +87,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Item $item)
     {
-        return view('category.edit', compact('category'));
+        return view('item.edit', compact('item'));
     }
 
     /**
@@ -101,41 +99,34 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request , Category $category)
+    public function update(Request $request, Item $item)
     {
-        // dd($request->all());
-
         $request->validate([
             
-            'language_codes' => 'required', 
+            'category_id' => 'required', 
             
+            'language_codes' => 'required', 
+
             'names' => 'required', 
             
-            'descriptions' => 'required', 
-           
             
         ]);
-       
+
         if ($request->img == null) {
 
-            $category->image="img/path";
-            $category->save();
-            
+            $item->image=$this->uploadeImage( $request);
+            $item->save();
         }
-      
-    
+        $item->category_id = $request->category_id;
+        
 
-        foreach ($category->categoryTranslation as $key=> $translation) {
+        foreach ($item->itemTranslation as $key=> $translation) {
             
-            $translation->category_id=$category->id;
+            $translation->item_id=$item->id;
             $translation->name=$request->names[$key];
-            $translation->description=$request->descriptions[$key];
-            
             $translation->save();
         }
-       
-       return redirect('some/url');
-
+        return redirect('some/url');
     }
 
     /**
@@ -144,11 +135,19 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Item $item)
     {
-        $category->categoryTranslation()->delete();
-        $category->delete();
+        $item->itemTranslation()->delete();
+        unlink($item->img);
+        $item->delete();
         return redirect('some/url');
+    }
+    private function uploadeImage(Request $request)
+    {
+        $imageName = time().".png";
 
+        $path ="storage/". $request->file('image')->storeAs('uploads/items', $imageName, 'public');
+    
+        return $path;
     }
 }

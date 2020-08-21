@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ItemsTranslation extends Model
+class ItemTranslation extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -17,11 +17,11 @@ class ItemsTranslation extends Model
 
     public function language()
     {
-        return $this->belongsTo('App\Language');
+        return $this->belongsTo(Language::class);
     }
 
     public function Item()
     {
-        return $this->belongsTo('App\Items');
+        return $this->belongsTo(Item::class);
     }
 }
