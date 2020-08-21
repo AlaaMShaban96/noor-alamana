@@ -8,6 +8,7 @@ use Tests\TestCase;
 
 class CategoryTest extends TestCase
 {
+    // use WithFaker, RefreshDatabase;
     /**
      * A basic feature test example.
      *
@@ -15,15 +16,17 @@ class CategoryTest extends TestCase
      */
     public function testExample()
     {
-        $response = $this->post('/category',
+        $this->withoutExceptionHandling();
+        $response = $this->post('api/category',
         [
-            'name' => 'Sally',
-            'language_code'=>1,
-            'name'=>"alaa",
-            'description'=>"alaa",
-            
+            'names' => ['ahmed','احمد'],
+
+            'language_codes'=> ['en','ar'],
+
+            'descriptions'=> ["description",'تفاصيل'],
+
             ]);
-            
+
   
         $response->assertStatus(200);
     }

@@ -17,7 +17,7 @@ class Category extends Model
 
     public function admin()
     {
-        return $this->belongsTo(Admin::class);
+        return $this->belongsTo(Admin::class,'admin_id');
     }
 
     public function categoryTranslation()

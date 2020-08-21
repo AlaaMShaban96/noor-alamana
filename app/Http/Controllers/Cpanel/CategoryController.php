@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cpanel;
 
 use App\Category;
+use App\CategoryTranslation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -25,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-     return view('Category.create');
+     return 'Category.create';
     }
 
     /**
@@ -36,21 +37,35 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+       
         $request->validate([
             
-            'language_code' => 'required', 
+            'language_codes' => 'required', 
             
-            'name' => 'required', 
+            'names' => 'required', 
             
-            'description' => 'required', 
+            'descriptions' => 'required', 
            
             
         ]);
-        Category::create([
-            'image'=>"img path",
-            'admin_id'=>1,
-        ]);
-     
+        
+        $category = new Category();
+        $category->admin_id = 1;
+        $category->image="img/path";
+        $category->save();
+
+        foreach ($request->language_codes as $key => $code) {
+            
+            $translation=new CategoryTranslation();
+            $translation->category_id=$category->id;
+            $translation->name=$request->names[$key];
+            $translation->description=$request->descriptions[$key];
+            $translation->language_code=$code;
+            $translation->save();
+        }
+       
+       return response()->json(['Create'=>'done'], 200);
+
     }
 
     /**
@@ -59,9 +74,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        return $category->categoryTranslation;
     }
 
     /**
@@ -70,9 +85,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return $category;
     }
 
     /**
@@ -82,9 +97,43 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request , Category $category)
     {
-        //
+        // dd($request->all());
+
+        $request->validate([
+            
+            'language_codes' => 'required', 
+            
+            'names' => 'required', 
+            
+            'descriptions' => 'required', 
+           
+            
+        ]);
+         
+        // $category = new Category();
+       
+        if ($request->img == null) {
+
+            $category->image="img/path";
+            $category->save();
+            
+        }
+      
+    
+
+        foreach ($category->categoryTranslation as $key=> $translation) {
+            
+            $translation->category_id=$category->id;
+            $translation->name=$request->names[$key];
+            $translation->description=$request->descriptions[$key];
+            
+            $translation->save();
+        }
+       
+       return response()->json(['Update'=>'done'], 200);
+
     }
 
     /**
@@ -93,8 +142,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->categoryTranslation()->delete();
+        $category->delete();
+        return response()->json(['delete'=>'done'], 200);
     }
 }
