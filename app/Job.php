@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Jobs extends Model
+class Job extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -17,16 +17,16 @@ class Jobs extends Model
 
     public function ourAddress()
     {
-        return $this->belongsTo('App\OurAddress');
+        return $this->belongsTo(OurAddress::class);
     }
 
-    public function JobsTranslation()
+    public function JobTranslation()
     {
-        return $this->hasMany('App\JobsTranslation');
+        return $this->hasMany(JobTranslation::class);
     }
 
     public function recruitmentForm()
     {
-        return $this->hasMany('App\RecruitmentForm');
+        return $this->hasMany(RecruitmentForm::class);
     }
 }

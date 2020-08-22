@@ -17,16 +17,16 @@ class Footer extends Model
 
     public function ourAddress()
     {
-        return $this->hasMany('App\OurAddress');
+        return $this->hasMany(OurAddress::class);
     }
 
-    public function phoneNumbers()
+    public function phoneNumber()
     {
-        return $this->hasMany('App\PhoneNumbers');
+        return $this->hasMany(PhoneNumber::class);
     }
 
-    public function emails()
+    public function email()
     {
-        return $this->hasMany('App\Emails');
+        return $this->hasMany(Email::class);
     }
 }

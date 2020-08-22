@@ -17,16 +17,16 @@ class OurAddress extends Model
 
     public function footer()
     {
-        return $this->belongsTo('App\Footer');
+        return $this->belongsTo(Footer::class);
     }
 
     public function ourAddressTranslation()
      {
-         return $this->hasMany('App\OurAddressTranslation');
+         return $this->hasMany(OurAddressTranslation::class);
      }
 
-     public function jobs()
+     public function job()
     {
-        return $this->hasMany('App\Jobs');
+        return $this->hasMany(Job::class);
     }
 }

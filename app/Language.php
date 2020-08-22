@@ -22,31 +22,31 @@ class Language extends Model
 
     public function ItemTranslation()
     {
-        return $this->hasMany('App\ItemsTranslation');
+        return $this->hasMany(ItemsTranslation::class);
     }
 
     public function slideTranslation()
     {
-        return $this->hasMany('App\SlideTranslation');
+        return $this->hasMany(SlideTranslation::class);
     }
 
     public function ourPartnersTranslation()
     {
-        return $this->hasMany('App\OurPartnersTranslation');
+        return $this->hasMany(OurPartnersTranslation::class);
     }
 
     public function ourAddressTranslation()
     {
-        return $this->hasMany('App\OurAddressTranslation');
+        return $this->hasMany(OurAddressTranslation::class);
     }
 
-    public function postsTranslation()
+    public function postTranslation()
     {
-        return $this->hasMany('App\PostsTranslation');
+        return $this->hasMany(PostTranslation::class);
     }
 
-    public function JobsTranslation()
+    public function JobTranslation()
     {
-        return $this->hasMany('App\JobsTranslation');
+        return $this->hasMany(JobTranslation::class);
     }
 }

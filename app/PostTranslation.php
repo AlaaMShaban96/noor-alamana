@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PostsTranslation extends Model
+class PostTranslation extends Model
 {
      /**
      * The attributes that are mass assignable.
@@ -17,11 +17,11 @@ class PostsTranslation extends Model
     
     public function post()
     {
-        return $this->belongsTo('App\Post');
+        return $this->belongsTo(Post::class);
     }
 
     public function language()
     {
-        return $this->belongsTo('App\Language');
+        return $this->belongsTo(Language::class);
     }
 }

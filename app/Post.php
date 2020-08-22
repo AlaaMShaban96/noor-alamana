@@ -17,11 +17,11 @@ class Post extends Model
 
     public function admin()
     {
-        return $this->belongsTo('App\Admin');
+        return $this->belongsTo(Admin::class);
     }
 
-    public function postsTranslation()
+    public function postTranslation()
     {
-        return $this->hasMany('App\PostsTranslation');
+        return $this->hasMany(PostTranslation::class);
     }
 }

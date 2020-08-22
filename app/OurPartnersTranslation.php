@@ -17,11 +17,11 @@ class OurPartnersTranslation extends Model
 
     public function ourPartners()
     {
-        return $this->belongsTo('App\OurPartners');
+        return $this->belongsTo(OurPartners::class);
     }
 
     public function language()
     {
-        return $this->belongsTo('App\Language');
+        return $this->belongsTo(Language::class);
     }
 }

@@ -17,11 +17,11 @@ class OurAddressTranslation extends Model
 
     public function ourAddress()
     {
-        return $this->belongsTo('App\OurAddress');
+        return $this->belongsTo(OurAddress::class);
     }
 
     public function language()
     {
-        return $this->belongsTo('App\Language');
+        return $this->belongsTo(Language::class);
     }
 }

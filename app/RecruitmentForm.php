@@ -15,13 +15,13 @@ class RecruitmentForm extends Model
         'job_id', 'city_id', 'fname','lname','email','phone','address','cvfile',
     ];
  
-    public function Jobs()
+    public function Job()
      {
-         return $this->belongsTo('App\Jobs');
+         return $this->belongsTo(Job::class);
      }
 
      public function city()
      {
-         return $this->belongsTo('App\City');
+         return $this->belongsTo(City::class);
      }
 }

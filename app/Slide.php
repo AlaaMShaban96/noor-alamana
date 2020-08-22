@@ -17,6 +17,6 @@ class Slide extends Model
 
     public function slideTranslation()
     {
-        return $this->hasMany('App\SlideTranslation');
+        return $this->hasMany(SlideTranslation::class);
     }
 }

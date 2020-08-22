@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Emails extends Model
+class Email extends Model
 {
      /**
      * The attributes that are mass assignable.
@@ -17,11 +17,11 @@ class Emails extends Model
 
     public function footer()
     {
-        return $this->belongsTo('App\Footer');
+        return $this->belongsTo(Footer::class);
     }
 
-    public function emailsType()
+    public function emailType()
     {
-        return $this->belongsTo('App\EmailsType');
+        return $this->belongsTo(EmailType::class);
     }
 }

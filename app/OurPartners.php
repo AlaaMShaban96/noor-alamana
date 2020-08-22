@@ -17,6 +17,6 @@ class OurPartners extends Model
 
      public function ourPartnersTranslation()
      {
-         return $this->hasMany('App\OurPartnersTranslation');
+         return $this->hasMany(OurPartnersTranslation::class);
      }
 }

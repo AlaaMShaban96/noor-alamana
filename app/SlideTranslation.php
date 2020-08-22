@@ -17,11 +17,11 @@ class SlideTranslation extends Model
 
     public function slide()
     {
-        return $this->belongsTo('App\Slide');
+        return $this->belongsTo(Slide::class);
     }
     
     public function language()
     {
-        return $this->belongsTo('App\Language');
+        return $this->belongsTo(Language::class);
     }
 }

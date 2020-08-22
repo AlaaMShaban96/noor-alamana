@@ -46,7 +46,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        //
+        $this->mapCpanelRoutes();
     }
 
     /**
@@ -77,4 +77,20 @@ class RouteServiceProvider extends ServiceProvider
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
     }
+
+    /**
+     * Define the "cpanel" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapCpanelRoutes()
+    {
+        Route::prefix('cpanel')
+             ->middleware(['web'])
+             ->namespace($this->namespace)
+             ->group(base_path('routes/cpanel.php'));
+    }    
+    
 }

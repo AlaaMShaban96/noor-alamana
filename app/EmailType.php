@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EmailsType extends Model
+class EmailType extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -15,8 +15,8 @@ class EmailsType extends Model
         'name', 'icon',
     ];
 
-    public function emails()
+    public function email()
     {
-        return $this->hasMany('App\Emails');
+        return $this->hasMany(Email::class);
     }
 }

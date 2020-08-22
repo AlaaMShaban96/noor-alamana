@@ -18,6 +18,6 @@ class City extends Model
 
     public function recruitmentForm()
     {
-        return $this->hasMany('App\RecruitmentForm');
+        return $this->hasMany(RecruitmentForm::class);
     }
 }

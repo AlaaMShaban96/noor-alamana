@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PhoneNumbers extends Model
+class PhoneNumber extends Model
 {
      /**
      * The attributes that are mass assignable.
@@ -17,6 +17,6 @@ class PhoneNumbers extends Model
 
     public function footer()
     {
-        return $this->belongsTo('App\Footer');
+        return $this->belongsTo(Footer::class);
     }
 }

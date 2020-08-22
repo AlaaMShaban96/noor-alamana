@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Cpanel;
+namespace App\Http\Controllers\Cpanel\Category;
 
 use App\Category;
 use App\CategoryTranslation;

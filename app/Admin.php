@@ -57,16 +57,16 @@ class Admin extends Authenticatable
     
     public function category()
     {
-        return $this->hasMany('App\Categories');
+        return $this->hasMany(Categories::class);
     }
 
     public function Items()
     {
-        return $this->hasMany('App\Items');
+        return $this->hasMany(Items::class);
     }
 
     public function post()
     {
-        return $this->hasMany('App\Post');
+        return $this->hasMany(Post::class);
     }
 }

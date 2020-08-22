@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class JobsTranslation extends Model
+class JobTranslation extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -17,11 +17,11 @@ class JobsTranslation extends Model
 
      public function language()
      {
-         return $this->belongsTo('App\Language');
+         return $this->belongsTo(Language::class);
      }
  
-     public function Jobs()
+     public function Job()
      {
-         return $this->belongsTo('App\Jobs');
+         return $this->belongsTo(Job::class);
      }
 }
